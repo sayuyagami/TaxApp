@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "443074507096",
+    "firebase_url": "https://taxapp-c9267.firebaseio.com",
+    "project_id": "taxapp-c9267",
+    "storage_bucket": "taxapp-c9267.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443074507096:android:e2fcd75bacd18629",
+        "android_client_info": {
+          "package_name": "com.app.taxapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443074507096-7tlv2j97r3f4m099af2m7sdfibt644cg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.taxapp",
+            "certificate_hash": "ed24441c610d8aff16f3c92103bb31ab3381a3ae"
+          }
+        },
+        {
+          "client_id": "443074507096-p35gvp6dpmbndr0jfquh07gdh7gjsdut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5dqeQcJyPDU5xsh2sabg82ajYKzW7Qls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443074507096-p35gvp6dpmbndr0jfquh07gdh7gjsdut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

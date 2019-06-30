@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ProfileActivity">
+
+    <item
+        android:id="@+id/Mypic"
+        android:icon="@drawable/ic_action_person"
+        app:showAsAction="always" >
+        <menu>
+            <item
+                android:id="@+id/profile"
+                android:enabled="true"
+                android:title="@string/my_profile" />
+            <item
+                android:id="@+id/tranhis"
+                android:title="@string/my_transactions"
+                android:icon="@drawable/ic_action_history"/>
+            <item
+                android:id="@+id/bell"
+                android:title="@string/notifications"
+                android:icon="@drawable/ic_action_bell"/>
+            <item
+                android:id="@+id/setting"
+                android:title="@string/settings"
+                android:icon="@drawable/ic_action_settings"/>
+            <item
+                android:id="@+id/feed"
+                android:title="@string/feedback"
+                android:icon="@drawable/ic_action_feed"/>
+            <item
+                android:id="@+id/info"
+                android:title="@string/info"
+                android:icon="@drawable/ic_action_info"/>
+            <item
+                android:id="@+id/logoutbtn"
+                android:title="@string/logout"
+                android:icon="@drawable/logoutbtn"/>
+        </menu>
+    </item>
+
+</menu>

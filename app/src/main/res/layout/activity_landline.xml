@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".Landline">
+
+    <RelativeLayout
+        android:paddingBottom="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:background="@drawable/landlineadv">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="7"
+        android:padding="50dp"
+        android:paddingLeft="50dp"
+        android:paddingTop="50dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="50dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        tools:targetApi="lollipop">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="421dp"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/landline_bill_payment"
+                    android:textColor="#43327E"
+                    android:textSize="24dp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/this_service_enables_you_to_pay_your_landline_bills_online"
+                android:textAlignment="center"
+                android:textColor="#9E9696"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RelativeLayout
+                android:layout_width="330dp"
+                android:layout_height="99dp"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/optext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/please_select_operator"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/airtel"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/optext"
+                    android:layout_marginTop="3dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="232dp"
+                    android:background="@drawable/custom_click"
+                    android:padding="15dp"
+                    android:src="@drawable/airtel" />
+
+                <ImageView
+                    android:id="@+id/bsnl"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_below="@+id/optext"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="148dp"
+                    android:background="@drawable/custom_click"
+                    android:padding="15dp"
+                    android:src="@drawable/bsnl" />
+
+                <ImageView
+                    android:id="@+id/tata"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_alignBottom="@+id/bsnl"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="134dp"
+                    android:layout_marginEnd="61dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/custom_click"
+                    android:src="@drawable/tata" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/pickcontact"
+                android:layout_width="38dp"
+                android:layout_height="31dp"
+                android:layout_marginLeft="280dp"
+                android:background="@drawable/ic_action_phone"
+                android:textColor="#000" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mobileno"
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginRight="14dp"
+                    android:ems="10"
+                    android:hint="@string/enter_select_a_number"
+                    android:inputType="number"
+                    android:padding="10dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/amt"
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginRight="14dp"
+                    android:ems="10"
+                    android:hint="@string/amount_to_be_paid"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:padding="10dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/tvpay"
+                    android:layout_width="131dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="99dp"
+                    android:layout_marginEnd="110dp"
+                    android:background="@drawable/custom_button"
+                    android:padding="5dp"
+                    android:text="@string/proceed"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

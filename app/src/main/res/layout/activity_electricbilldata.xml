@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Electricbilldata">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_margin="10dp"
+            android:text="Customer Bill Details"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Consumer Name   :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/a"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/cons" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/addre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Address Details     :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/b"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/addre" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/billn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Bill Number            :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/c"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/billn" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/billd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Bill Date                  :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/d"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/billd" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/uk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Ukscno                   :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/e"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/uk" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/sn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="SC No                     :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/f"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/sn" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="District                   :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/g"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/dt" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/er"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="ERO                        :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/h"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/er" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/du"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Due Date               :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/i"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/du" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Transaction Charges: ₹"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/j"
+                android:textSize="20dp"
+                android:textColor="#DD000000"
+                android:layout_margin="10dp"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tc" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/tp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="total amount to be paid : ₹"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/k"
+                android:textSize="20dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tp" />
+        </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="Note : You can pay maximum of ₹20000/-"
+                android:textColor="#43327E" />
+
+        <Button
+            android:id="@+id/pn"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="25dp"
+            android:layout_gravity="center"
+            android:text="@string/pay_now"
+            android:textColor="#fff"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@drawable/custom_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

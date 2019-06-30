@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:padding="10dp"
+    tools:context=".Bookings">
+
+    <RelativeLayout
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/booktext"
+            android:text="@string/bus_booking"
+            android:textSize="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@id/booktext"
+            android:textSize="18dp"
+            android:text="@string/check_the_buses_which_are_avaliable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="20dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/fromtext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/from"
+                android:textColor="#000"
+                android:textSize="24dp" />
+
+            <Button
+                android:id="@+id/source"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fromtext"
+                android:background="#fff"
+                android:text="@string/select_source"
+                android:textColor="#000" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:padding="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:padding="10dp"
+                android:textColor="#000"
+                android:text="@string/to"
+                android:textSize="24dp"
+                android:id="@+id/totext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_below="@+id/totext"
+                android:id="@+id/dest"
+                android:text="@string/select_destination"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:background="#fff"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:padding="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:padding="10dp"
+                android:textColor="#000"
+                android:text="@string/date"
+                android:textSize="24dp"
+                android:id="@+id/calender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+           <Button
+               android:textColor="#000"
+               android:text="@string/set_journey_date"
+               android:background="#fff"
+               android:layout_below="@+id/calender"
+               android:id="@+id/datebtn"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="150dp"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:text=" > "
+        android:textColor="#fff"
+        android:textSize="40dp" />
+
+
+</LinearLayout>
