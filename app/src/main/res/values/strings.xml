@@ -38,7 +38,7 @@
     <string name="recharge_amount">Recharge amount( ₹ )</string>
     <string name="proceed_to_pay">Proceed to pay</string>
     <string name="complaint_register">Complaint Register</string>
-    <string name="give_details_about_your_problem_submit_your_complaint_ghmc_will_solve_your_problem_as_soon_as_possible">Give details about your problem submit your complaint.GHMC will solve your problem as soon as possible.</string>
+    <string name="give_details_about_your_problem_submit_your_complaint_ghmc_will_solve_your_problem_as_soon_as_possible">GHMC will solve your problem as soon as possible.</string>
     <string name="select_category">Select Category</string>
     <string name="select_problem_type">Select problem type</string>
     <string name="enter_your_description">Enter your description</string>

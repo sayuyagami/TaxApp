@@ -24,24 +24,32 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
+import static java.lang.Integer.parseInt;
+
 public class Complaints extends Settings {
 
+    DataSnapshot ds;
     SpinnerDialog categoryspinnerDialog;
     SpinnerDialog prblmspinnerDialog;
     TextInputEditText userno,landmark,descp;
@@ -59,6 +67,8 @@ public class Complaints extends Settings {
 
     String cameraPermission[];
     String storagePermission[];
+
+    public ArrayList<String> msg = new ArrayList<>();
 
     ArrayList<String> type1 = new ArrayList<>();
     ArrayList<String> type2 = new ArrayList<>();
@@ -80,7 +90,9 @@ public class Complaints extends Settings {
 
         //loadUserInformation();
 
+        final int no = 1;
         details = new Complaintdetails();
+        final TextView complaintid = findViewById(R.id.complaintid);
         category = (Button) findViewById(R.id.category);
         problem = (Button) findViewById(R.id.problem);
         userno = findViewById(R.id.userno);
@@ -342,29 +354,51 @@ public class Complaints extends Settings {
 
         //database connection
         reff = FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
+
+        /*ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String cid = ds.child("complaintid").getValue(String.class);
+                    Log.d("TAG", cid);
+                    //int idnum = Integer.parseInt(cid) + 1;
+                    complaintid.setText(cid + 1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        reff.addListenerForSingleValueEvent(eventListener);*/
+
+
         complaintsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String cat = category.getText().toString().trim();
-                String prblm = problem.getText().toString().trim();
-                String uno = userno.getText().toString().trim();
-                String lmark = landmark.getText().toString().trim();
-                String dcp = descp.getText().toString().trim();
+                            String cid = ds.child("complaintid").getValue(String.class);
+                            String cat = category.getText().toString().trim();
+                            String prblm = problem.getText().toString().trim();
+                            String uno = userno.getText().toString().trim();
+                            String lmark = landmark.getText().toString().trim();
+                            String dcp = descp.getText().toString().trim();
 
-                try {
-                    if (!cat.isEmpty() && !prblm.isEmpty() && !uno.isEmpty() && !lmark.isEmpty() && !dcp.isEmpty()){
-                        details.setCategory(cat);
-                        details.setProblem(prblm);
-                        details.setMno(uno);
-                        details.setLand(lmark);
-                        details.setDescp(dcp);
+                            try {
+                                if (!cid.isEmpty() && !cat.isEmpty() && !prblm.isEmpty() && !uno.isEmpty() && !lmark.isEmpty() && !dcp.isEmpty()){
+                                    details.setComplaintid(cid);
+                                    details.setCategory(cat);
+                                    details.setProblem(prblm);
+                                    details.setMno(uno);
+                                    details.setLand(lmark);
+                                    details.setDescp(dcp);
 
-                        reff.push().setValue(details);
-                        Toast.makeText(Complaints.this,"Complaint Submitted",Toast.LENGTH_LONG).show();
-                    }
-                } catch (NullPointerException e){
-                    Toast.makeText(Complaints.this,"Please fill all the feilds ",Toast.LENGTH_LONG).show();
-                }
+                                    reff.child(cid).setValue(details);
+                                    Toast.makeText(Complaints.this,"Complaint Submitted",Toast.LENGTH_LONG).show();
+                                }
+                            } catch (NullPointerException e){
+                                Toast.makeText(Complaints.this,"Please fill all the feilds ",Toast.LENGTH_LONG).show();
+                            }
+
             }
         });
     }

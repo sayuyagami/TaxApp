@@ -1,9 +1,17 @@
 package com.app.taxapp;
 
 public class Complaintdetails {
-    String category,problem,mno,land,descp;
+    String category,problem,mno,land,descp,complaintid;
 
     public Complaintdetails() {
+    }
+
+    public String getComplaintid() {
+        return complaintid;
+    }
+
+    public void setComplaintid(String complaintid) {
+        this.complaintid = complaintid;
     }
 
     public String getCategory() {

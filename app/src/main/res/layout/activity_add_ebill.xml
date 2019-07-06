@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Bill Details"
+                android:text="Electricity Bill Details"
                 android:textAlignment="center"
                 android:textColor="#43327E"
                 android:textSize="28sp" />
