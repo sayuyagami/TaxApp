@@ -77,7 +77,7 @@
 
             <Button
                 android:id="@+id/book"
-                android:text="Bus Bookings"
+                android:text="Tanker Bookings"
                 android:layout_margin="20dp"
                 android:textSize="20dp"
                 android:textColor="#000"

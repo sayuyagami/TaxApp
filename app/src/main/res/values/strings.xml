@@ -90,5 +90,10 @@
     <string name="subject">Subject</string>
     <string name="please_select_3_images">Please select 3 images</string>
     <string name="pay_now">Pay Now</string>
+    <string name="book_watertanker">Book Tanker</string>
+    <string name="book_water_tanker">Book Water Tanker</string>
+    <string name="check_status">Check Status</string>
+    <string name="book_tanker">Book Tanker</string>
+    <string name="water_tankers_are_available_at_anytime">water tankers are available at anytime</string>
 
 </resources>

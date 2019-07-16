@@ -90,5 +90,10 @@
     <string name="name">नाम</string>
     <string name="subject">विषय</string>
     <string name="please_select_3_images">कृपया 3 चित्र चुनें</string>
-    <string name="pay_now">Pay Now</string>
+    <string name="pay_now">अब भुगतान करें</string>
+    <string name="book_watertanker">पुस्तक टैंकर</string>
+    <string name="book_water_tanker">Book Water Tanker</string>
+    <string name="check_status">Check Status</string>
+    <string name="book_tanker">Book Tanker</string>
+    <string name="water_tankers_are_available_at_anytime">water tankers are available at anytime</string>
 </resources>

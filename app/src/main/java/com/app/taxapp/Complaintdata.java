@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ public class Complaintdata extends AppCompatActivity {
 
     DatabaseReference data;
     SendNotifications notify;
+    ListView listView;
     private String m_Text = "";
     public ArrayList<String> feed = new ArrayList<>();
 
@@ -39,7 +41,7 @@ public class Complaintdata extends AppCompatActivity {
         notify = new SendNotifications();
         data = FirebaseDatabase.getInstance().getReference().child("SendNotifications");
 
-        final ListView listView = (ListView)findViewById(R.id.clist);
+        listView = findViewById(R.id.clist);
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference usersdRef = rootRef.child("Complaintdetails");
         ValueEventListener eventListener = new ValueEventListener() {
@@ -97,6 +99,7 @@ public class Complaintdata extends AppCompatActivity {
                                 final EditText input = new EditText(Complaintdata.this);
                                 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                                 input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                                input.setText("Thanks for Contacting us !!"+"\n"+"We will be there in 24 mins,if you have any complaints please feel free to contact us");
                                 builder.setView(input);
 
                                 // Set up the buttons
@@ -134,6 +137,9 @@ public class Complaintdata extends AppCompatActivity {
                         public void onCancelled(DatabaseError databaseError) {}
                     };
                     usersdRef.addListenerForSingleValueEvent(eventListener);
+                }else {
+                    Intent intent = new Intent(Complaintdata.this,ViewImages.class);
+                    startActivity(intent);
                 }
             }
         });

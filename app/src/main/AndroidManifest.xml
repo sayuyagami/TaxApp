@@ -17,12 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Check_Regtanker"></activity>
+        <activity android:name=".Regtanker" />
+        <activity android:name=".Booktanker" />
+        <activity android:name=".ViewImages" />
         <activity android:name=".AddBookings" />
         <activity android:name=".Busavailable" />
         <activity android:name=".Complaintdata" />
         <activity android:name=".Propertytaxdata" />
         <activity android:name=".Waterbilldata" />
-        <activity android:name=".Electricbilldata"></activity>
+        <activity android:name=".Electricbilldata" />
         <activity android:name=".AddPTbill" />
         <activity android:name=".AddWbill" />
         <activity android:name=".AddEbill" />

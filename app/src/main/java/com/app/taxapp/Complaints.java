@@ -3,6 +3,7 @@ package com.app.taxapp;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,6 +35,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +43,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -50,19 +59,23 @@ import static java.lang.Integer.parseInt;
 public class Complaints extends Settings {
 
     DataSnapshot ds;
-    SpinnerDialog categoryspinnerDialog;
-    SpinnerDialog prblmspinnerDialog;
+    UploadTask.TaskSnapshot ts1,ts2,ts3;
+    EditText complaintid;
+    SpinnerDialog categoryspinnerDialog,prblmspinnerDialog;
     TextInputEditText userno,landmark,descp;
-    //RadioButton location;
-    Button complaintsubmit;
-    Button category;
-    Button problem;
+    Button complaintsubmit,category,problem;
     ImageView addpicleft,addpic,addpicright;
-    Integer REQUEST_CAMERA=1, SELECT_FILE =0;
+
+    Integer REQUEST_CAMERA=1;
     private final int CODE_IMG_GALLERY = 1;
     private final int CODE_MULTIPLE_IMG_GALLERY = 3;
     private static final int CAMERA_REQUEST_CODE = 200;
-    DatabaseReference reff,img;
+
+    DatabaseReference reff;
+    StorageReference storagereff;
+
+    StorageTask stask;
+    Uri imguril,imguri,imgurir;
     Complaintdetails details;
 
     String cameraPermission[];
@@ -88,11 +101,8 @@ public class Complaints extends Settings {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaints);
 
-        //loadUserInformation();
-
-        final int no = 1;
         details = new Complaintdetails();
-        final TextView complaintid = findViewById(R.id.complaintid);
+        complaintid = findViewById(R.id.complaintid);
         category = (Button) findViewById(R.id.category);
         problem = (Button) findViewById(R.id.problem);
         userno = findViewById(R.id.userno);
@@ -108,14 +118,6 @@ public class Complaints extends Settings {
         addpicleft = (ImageView) findViewById(R.id.addpicleft);
         addpic = (ImageView) findViewById(R.id.addpic);
         addpicright = (ImageView) findViewById(R.id.addpicright);
-
-        /*location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // Intent intent = new Intent(Complaints.this,MapsActivity.class);
-                //startActivity(intent);
-            }
-        });*/
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -352,10 +354,8 @@ public class Complaints extends Settings {
 
         });
 
-        //database connection
-        reff = FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
-
-        /*ValueEventListener eventListener = new ValueEventListener() {
+        /*final String cid = ds.child("complaintid").getValue(String.class);
+        ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -373,55 +373,20 @@ public class Complaints extends Settings {
         reff.addListenerForSingleValueEvent(eventListener);*/
 
 
+        //database connection
+        reff = FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
+
         complaintsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                            String cid = ds.child("complaintid").getValue(String.class);
-                            String cat = category.getText().toString().trim();
-                            String prblm = problem.getText().toString().trim();
-                            String uno = userno.getText().toString().trim();
-                            String lmark = landmark.getText().toString().trim();
-                            String dcp = descp.getText().toString().trim();
-
-                            try {
-                                if (!cid.isEmpty() && !cat.isEmpty() && !prblm.isEmpty() && !uno.isEmpty() && !lmark.isEmpty() && !dcp.isEmpty()){
-                                    details.setComplaintid(cid);
-                                    details.setCategory(cat);
-                                    details.setProblem(prblm);
-                                    details.setMno(uno);
-                                    details.setLand(lmark);
-                                    details.setDescp(dcp);
-
-                                    reff.child(cid).setValue(details);
-                                    Toast.makeText(Complaints.this,"Complaint Submitted",Toast.LENGTH_LONG).show();
-                                }
-                            } catch (NullPointerException e){
-                                Toast.makeText(Complaints.this,"Please fill all the feilds ",Toast.LENGTH_LONG).show();
-                            }
-
+                if (stask!= null && stask.isInProgress()){
+                    Toast.makeText(Complaints.this,"Upload in progress",Toast.LENGTH_LONG).show();
+                }else {
+                    uploadimage();
+                }
             }
         });
     }
-
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-
-        if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            Intent intent = new Intent(this,ProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-            startActivity(intent);
-        }
-    }
-
-    private void loadUserInformation() {
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user.getPhoneNumber() != null) {
-
-        }
-    }*/
 
     //actionbar menu
     @Override
@@ -524,9 +489,14 @@ public class Complaints extends Settings {
 
                             for (int i = 0; i < clipData.getItemCount(); i++) {
 
-                                ClipData.Item item = clipData.getItemAt(i);
-                                Uri uri = item.getUri();
-                                Log.e("MAS IMGS: ", uri.toString());
+                                //ClipData.Item item = clipData.getItemAt(i);
+                                imguril = clipData.getItemAt(0).getUri();
+                                imguri = clipData.getItemAt(1).getUri();
+                                imgurir = clipData.getItemAt(2).getUri();
+                                Log.e("MAS IMGS: ", imguri.toString());
+                                /*Picasso.with(this).load(imguril).into(addpicleft);
+                                Picasso.with(this).load(imguri).into(addpic);
+                                Picasso.with(this).load(imgurir).into(addpicright);*/
                             }
                         }
                     } catch (NullPointerException e){
@@ -535,6 +505,114 @@ public class Complaints extends Settings {
                 }else {
                     Toast.makeText(Complaints.this,"Please select 3 images",Toast.LENGTH_LONG).show();
                 }
+            }
+        }
+    }
+
+    private  String getFileExtension(Uri uri){
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private  void uploadimage(){
+        final String cid = complaintid.getText().toString().trim();
+        String cat = category.getText().toString().trim();
+        String prblm = problem.getText().toString().trim();
+        String uno = userno.getText().toString().trim();
+        String lmark = landmark.getText().toString().trim();
+        String dcp = descp.getText().toString().trim();
+
+        storagereff = FirebaseStorage.getInstance().getReference(cid);
+
+        if (imguril!= null && imguri!= null && imgurir!= null ){
+            final StorageReference file1reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imguril));
+            final StorageReference file2reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imguri));
+            final StorageReference file3reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imgurir));
+
+            //stask = file2reff.putFile(imguri);
+
+            file1reff.putFile(imguril).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(final UploadTask.TaskSnapshot ts1) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                        }
+                    },500);
+                    file1reff.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String url1 = ts1.getUploadSessionUri().toString();
+                            details.setAddpicleft(url1);
+                            reff.child(cid).setValue(details);
+                            addpicleft.setImageResource(R.drawable.ic_action_image);
+                        }
+                    });
+                }
+            });
+
+            file2reff.putFile(imguri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(final UploadTask.TaskSnapshot ts2) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                        }
+                    },500);
+                    file2reff.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String url2 = ts2.getUploadSessionUri().toString();
+                            details.setAddpic(url2);
+                            reff.child(cid).setValue(details);
+                            addpic.setImageResource(R.drawable.ic_action_image);
+                        }
+                    });
+                }
+            });
+
+            file3reff.putFile(imgurir).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(final UploadTask.TaskSnapshot ts3) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                        }
+                    },500);
+                    file3reff.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String url3 = ts3.getUploadSessionUri().toString();
+                            details.setAddpicright(url3);
+                            reff.child(cid).setValue(details);
+                            Toast.makeText(Complaints.this, "Complaint Submitted successfully", Toast.LENGTH_LONG).show();
+                            addpicright.setImageResource(R.drawable.ic_action_image);
+                        }
+                    });
+                }
+            });
+
+            try {
+                if (!cid.isEmpty() && !cat.isEmpty() && !prblm.isEmpty() && !uno.isEmpty() && !lmark.isEmpty() && !dcp.isEmpty()){
+                    details.setComplaintid(cid);
+                    details.setCategory(cat);
+                    details.setProblem(prblm);
+                    details.setMno(uno);
+                    details.setLand(lmark);
+                    details.setDescp(dcp);
+
+                    reff.child(cid).setValue(details);
+                    //Toast.makeText(Complaints.this,"Complaint Submitted",Toast.LENGTH_LONG).show();
+                }
+            } catch (NullPointerException e){
+                Toast.makeText(Complaints.this,"Please fill all the feilds ",Toast.LENGTH_LONG).show();
             }
         }
     }

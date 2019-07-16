@@ -90,5 +90,10 @@
     <string name="name">పేరు</string>
     <string name="subject">విషయం</string>
     <string name="please_select_3_images">దయచేసి 3 చిత్రాలను ఎంచుకోండి</string>
-    <string name="pay_now">Pay Now</string>
+    <string name="pay_now">ఇప్పుడు చెల్లించండి</string>
+    <string name="book_watertanker">బుక్ ట్యాంకర్</string>
+    <string name="book_water_tanker">Book Water Tanker</string>
+    <string name="check_status">Check Status</string>
+    <string name="book_tanker">Book Tanker</string>
+    <string name="water_tankers_are_available_at_anytime">water tankers are available at anytime</string>
 </resources>

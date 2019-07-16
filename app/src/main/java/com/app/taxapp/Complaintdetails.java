@@ -1,9 +1,45 @@
 package com.app.taxapp;
 
 public class Complaintdetails {
-    String category,problem,mno,land,descp,complaintid;
+    String category,problem,mno,land,descp,complaintid,addpicleft,addpic,addpicright;
 
     public Complaintdetails() {
+    }
+
+    public Complaintdetails(String category, String problem, String mno, String land, String descp, String complaintid, String addpicleft, String addpic, String addpicright) {
+        this.category = category;
+        this.problem = problem;
+        this.mno = mno;
+        this.land = land;
+        this.descp = descp;
+        this.complaintid = complaintid;
+        this.addpicleft = addpicleft;
+        this.addpic = addpic;
+        this.addpicright = addpicright;
+    }
+
+    public String getAddpicleft() {
+        return addpicleft;
+    }
+
+    public void setAddpicleft(String addpicleft) {
+        this.addpicleft = addpicleft;
+    }
+
+    public String getAddpic() {
+        return addpic;
+    }
+
+    public void setAddpic(String addpic) {
+        this.addpic = addpic;
+    }
+
+    public String getAddpicright() {
+        return addpicright;
+    }
+
+    public void setAddpicright(String addpicright) {
+        this.addpicright = addpicright;
     }
 
     public String getComplaintid() {

@@ -25,7 +25,7 @@ public class ProfileActivity extends Settings {
     ImageView dthbtn;
     ImageView complaintbtn;
     ImageView duebtn;
-    ImageView wifibtn;
+    ImageView tankerbtn;
     ImageView landlinebtn;
     ImageView bookbtn;
     ImageView callsbtn;
@@ -65,7 +65,8 @@ public class ProfileActivity extends Settings {
         dthbtn = (ImageView)findViewById(R.id.dthbtn);
         complaintbtn = (ImageView)findViewById(R.id.complaintbtn);
         duebtn = (ImageView)findViewById(R.id.duebtn);
-        wifibtn = (ImageView)findViewById(R.id.wifibtn);
+        //wifibtn = (ImageView)findViewById(R.id.wifibtn);
+        tankerbtn = (ImageView)findViewById(R.id.tankerbtn);
         landlinebtn = (ImageView)findViewById(R.id.landlinebtn);
         bookbtn = (ImageView)findViewById(R.id.bookbtn);
         callsbtn = (ImageView)findViewById(R.id.callsbtn);
@@ -159,7 +160,7 @@ public class ProfileActivity extends Settings {
             }
         });
 
-        wifibtn.setOnClickListener(new View.OnClickListener() {
+        /*wifibtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 wifi();
@@ -169,6 +170,19 @@ public class ProfileActivity extends Settings {
             @Override
             public void onClick(View v) {
                 wifi();
+            }
+        });*/
+
+        tankerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tanker();
+            }
+        });
+        item7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tanker();
             }
         });
 
@@ -299,9 +313,15 @@ public class ProfileActivity extends Settings {
         startActivity(intent);
     }
 
-    private void wifi(){
+    /*private void wifi(){
 
         Intent intent = new Intent(ProfileActivity.this,Wifi.class);
+        startActivity(intent);
+    }*/
+
+    private void tanker(){
+
+        Intent intent = new Intent(ProfileActivity.this,Booktanker.class);
         startActivity(intent);
     }
 

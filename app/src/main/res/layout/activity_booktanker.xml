@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Booktanker">
+
+    <RelativeLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/booktext"
+            android:text="@string/book_tanker"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@id/booktext"
+            android:textSize="18sp"
+            android:text="@string/water_tankers_are_available_at_anytime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="20dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/bt"
+                android:src="@drawable/tanker"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"/>
+            <TextView
+                android:layout_marginTop="18sp"
+                android:id="@+id/source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:text="@string/book_water_tanker"
+                android:textColor="#000" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:padding="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cwt"
+                android:padding="20dp"
+                android:background="#fff"
+                android:src="@drawable/tanker"
+                android:layout_width="match_parent"
+                android:layout_height="180dp" />
+
+            <ImageView
+                android:layout_width="302dp"
+                android:layout_height="116dp"
+                android:layout_above="@+id/cwt"
+                android:layout_alignStart="@+id/cwt"
+                android:layout_alignEnd="@+id/cwt"
+                android:layout_alignBottom="@+id/cwt"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="38dp"
+                android:padding="20dp"
+                android:src="@drawable/checked" />
+            <TextView
+                android:layout_marginTop="18sp"
+                android:id="@+id/dest"
+                android:text="@string/check_status"
+                android:background="#fff"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
