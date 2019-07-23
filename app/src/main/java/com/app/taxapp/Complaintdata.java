@@ -99,7 +99,7 @@ public class Complaintdata extends AppCompatActivity {
                                 final EditText input = new EditText(Complaintdata.this);
                                 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                                 input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-                                input.setText("Thanks for Contacting us !!"+"\n"+"We will be there in 24 mins,if you have any complaints please feel free to contact us");
+                                input.setText("Thanks for Contacting us !!"+"\n"+"We will be there in 24 mins,Please send feedback about our work!!");
                                 builder.setView(input);
 
                                 // Set up the buttons
@@ -112,6 +112,7 @@ public class Complaintdata extends AppCompatActivity {
                                         notify.setComid(cid);
                                         notify.setCategory(un);
                                         notify.setPrblm(em);
+                                        notify.setStatus("Request accepted");
                                         notify.setMessage(m_Text);
 
                                         data.child(cid).setValue(notify);

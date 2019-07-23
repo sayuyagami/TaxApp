@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -54,29 +55,30 @@ import java.util.ArrayList;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
+import static android.view.View.VISIBLE;
 import static java.lang.Integer.parseInt;
 
 public class Complaints extends Settings {
 
-    DataSnapshot ds;
-    UploadTask.TaskSnapshot ts1,ts2,ts3;
     EditText complaintid;
     SpinnerDialog categoryspinnerDialog,prblmspinnerDialog;
     TextInputEditText userno,landmark,descp;
     Button complaintsubmit,category,problem;
     ImageView addpicleft,addpic,addpicright;
+    ProgressBar submitbar;
 
     Integer REQUEST_CAMERA=1;
     private final int CODE_IMG_GALLERY = 1;
     private final int CODE_MULTIPLE_IMG_GALLERY = 3;
     private static final int CAMERA_REQUEST_CODE = 200;
 
-    DatabaseReference reff;
+    DatabaseReference reff,creff;
     StorageReference storagereff;
 
     StorageTask stask;
     Uri imguril,imguri,imgurir;
     Complaintdetails details;
+    SendNotifications data;
 
     String cameraPermission[];
     String storagePermission[];
@@ -101,7 +103,9 @@ public class Complaints extends Settings {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaints);
 
+        submitbar = findViewById(R.id.submitbar);
         details = new Complaintdetails();
+        data = new SendNotifications();
         complaintid = findViewById(R.id.complaintid);
         category = (Button) findViewById(R.id.category);
         problem = (Button) findViewById(R.id.problem);
@@ -110,7 +114,7 @@ public class Complaints extends Settings {
         descp = findViewById(R.id.descp);
         complaintsubmit = (Button)findViewById(R.id.complaintsubmit);
 
-        SharedPreferences share = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+        final SharedPreferences share = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
         final String mno = share.getString("mobileno","");
 
         userno.setText(mno);
@@ -375,13 +379,15 @@ public class Complaints extends Settings {
 
         //database connection
         reff = FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
+        creff = FirebaseDatabase.getInstance().getReference().child("SendNotifications");
 
         complaintsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (stask!= null && stask.isInProgress()){
-                    Toast.makeText(Complaints.this,"Upload in progress",Toast.LENGTH_LONG).show();
+                if (stask == null){
+                    Toast.makeText(Complaints.this,"please fill all the fields",Toast.LENGTH_LONG).show();
                 }else {
+                    submitbar.setVisibility(VISIBLE);
                     uploadimage();
                 }
             }
@@ -594,6 +600,7 @@ public class Complaints extends Settings {
                             reff.child(cid).setValue(details);
                             Toast.makeText(Complaints.this, "Complaint Submitted successfully", Toast.LENGTH_LONG).show();
                             addpicright.setImageResource(R.drawable.ic_action_image);
+                            submitbar.setVisibility(View.GONE);
                         }
                     });
                 }
@@ -608,7 +615,22 @@ public class Complaints extends Settings {
                     details.setLand(lmark);
                     details.setDescp(dcp);
 
+                    data.setComid(cid);
+                    data.setCategory(cat);
+                    data.setPrblm(prblm);
+                    data.setMessage("in process");
+                    data.setStatus("Wait for reply");
+
                     reff.child(cid).setValue(details);
+                    creff.child(cid).setValue(data);
+
+                    complaintid.setText("");
+                    category.setText("SELECT CATEGORY");
+                    problem.setText("SELECT PROBLEM TYPE");
+                    userno.setText("");
+                    landmark.setText("");
+                    descp.setText("");
+
                     //Toast.makeText(Complaints.this,"Complaint Submitted",Toast.LENGTH_LONG).show();
                 }
             } catch (NullPointerException e){

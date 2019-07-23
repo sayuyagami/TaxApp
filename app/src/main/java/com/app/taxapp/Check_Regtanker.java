@@ -42,7 +42,7 @@ public class Check_Regtanker extends AppCompatActivity {
                     //Log.d("TAG", stat);
                     Log.d("TAG", un);
 
-                    msg.add("\n"+"Name :" +cat+"\n"+cid+"\n"+"Status :"+ "Request accepted"+"\n"+un+"\n");
+                    msg.add("\n"+"Name :" +cat+"\n"+cid+"\n"+"Status :"+ "Request accepted"+"\n"+"Reply :"+un+"\n");
 
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Check_Regtanker.this,android.R.layout.simple_list_item_1,msg);

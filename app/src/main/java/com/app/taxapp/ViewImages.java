@@ -43,13 +43,13 @@ public class ViewImages extends AppCompatActivity {
 
         mUploads= new ArrayList<>();
 
-        mDatabaseRef= FirebaseDatabase.getInstance().getReference().child("Complaintdetails").child("1");
+        mDatabaseRef= FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Complaintdetails upload=dataSnapshot.getValue(Complaintdetails.class);
 
-                                    /*String cid = postSnapshot.child("complaintid").getValue(String.class);
+                    /*String cid = postSnapshot.child("complaintid").getValue(String.class);
                     String apl = postSnapshot.child("addpicleft").getValue(String.class);
                     String ap =postSnapshot.child("addpic").getValue(String.class);
                     String apr = postSnapshot.child("addpicright").getValue(String.class);
@@ -60,10 +60,10 @@ public class ViewImages extends AppCompatActivity {
                     mUploads.add(apr);*/
 
                 mUploads.add(upload);
+                Toast.makeText(ViewImages.this,"Data : "+mUploads.add(upload),Toast.LENGTH_LONG).show();
 
                 mAdapter=new ImageAdapter(ViewImages.this,mUploads);
                 mRecyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
                 //Toast.makeText(ViewImages.this,"details: "+mUploads.get(1),Toast.LENGTH_LONG).show();
                 Toast.makeText(ViewImages.this,"details: "+upload.getDescp(),Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.INVISIBLE);

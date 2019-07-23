@@ -17,13 +17,16 @@
         android:textColor="#43327E"
         android:textSize="30sp" />
 
-    <Spinner
+    <Button
         android:id="@+id/ward"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:text="Select Street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/street"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"

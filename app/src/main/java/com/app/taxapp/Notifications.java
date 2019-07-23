@@ -35,13 +35,15 @@ public class Notifications extends Settings {
                     String cat = ds.child("category").getValue(String.class).trim();
                     String prblm = ds.child("prblm").getValue(String.class).trim();
                     String un = ds.child("message").getValue(String.class).trim();
+                    String sta = ds.child("status").getValue(String.class).trim();
 
                     Log.d("TAG", cid);
                     Log.d("TAG", cat);
                     Log.d("TAG", prblm);
+                    Log.d("TAG", sta);
                     Log.d("TAG", un);
 
-                    msg.add("\n"+"Complaint Id :" +cid+"\n"+cat+"\n"+prblm+"\n"+un+"\n");
+                    msg.add("\n"+"Complaint Id :" +cid+"\n"+"Category :"+cat+"\n"+"Problemtype :"+prblm+"\n"+"Status : "+sta+"\n"+"Reply :"+un+"\n");
 
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Notifications.this,android.R.layout.simple_list_item_1,msg);

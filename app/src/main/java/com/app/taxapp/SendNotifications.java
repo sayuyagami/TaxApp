@@ -1,9 +1,17 @@
 package com.app.taxapp;
 
 public class SendNotifications {
-    String message,comid,category,prblm;
+    String message,comid,category,prblm,status;
 
     public SendNotifications() {
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getComid() {

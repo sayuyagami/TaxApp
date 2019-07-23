@@ -94,9 +94,6 @@ public class Electricbill extends Settings {
             public void onClick(View v) {
 
                 clicked = true;
-                /*GradientDrawable gradientDrawable =new GradientDrawable();
-                gradientDrawable.setStroke(2,getResources().getColor(R.color.colorPrimary));
-                sp.setBackground(gradientDrawable);*/
                 Toast.makeText(Electricbill.this,"Southern power selected",Toast.LENGTH_LONG).show();
                 list.clear();
                 initItems1();

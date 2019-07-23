@@ -58,6 +58,13 @@
                 android:textColor="#9E9696"
                 android:textSize="18sp"
                 android:textStyle="normal" />
+
+            <ProgressBar
+                android:id="@+id/submitbar"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

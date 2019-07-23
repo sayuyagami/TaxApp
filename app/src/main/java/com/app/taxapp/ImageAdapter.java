@@ -21,9 +21,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     private List<Complaintdetails> mUploads;
     DataSnapshot ds;
 
-    public ImageAdapter(Context context, List<Complaintdetails> complaintdetails) {
-        mContext = context;
-        mUploads = complaintdetails;
+    public ImageAdapter(Context mContext, List<Complaintdetails> mUploads) {
+        this.mContext = mContext;
+        this.mUploads = mUploads;
     }
 
     @NonNull
@@ -38,8 +38,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
 
         //mUploads = new ArrayList<>();
-        //Complaintdetails uploadCur = mUploads.get(i);
-        Complaintdetails uploadCur = new Complaintdetails();
+        Complaintdetails uploadCur = mUploads.get(i);
+        //Complaintdetails uploadCur = new Complaintdetails();
         //Complaintdetails uploadCur = ds.getValue(Complaintdetails.class);
 
         //imageViewHolder.image_view1.setImageURI(data.getAddpicleft());
@@ -50,7 +50,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 .centerCrop()
                 .into(imageViewHolder.image_view1);
 
-        Picasso.with(mContext)
+        /*Picasso.with(mContext)
                 .load(uploadCur.getAddpic())
                 .placeholder(R.drawable.ic_action_image)
                 .fit()
@@ -62,27 +62,27 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 .placeholder(R.drawable.ic_action_image)
                 .fit()
                 .centerCrop()
-                .into(imageViewHolder.image_view3);
+                .into(imageViewHolder.image_view3);*/
 
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return mUploads.size();
     }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         //public TextView img_description;
         public ImageView image_view1;
-        public ImageView image_view2;
-        public ImageView image_view3;
+        //public ImageView image_view2;
+        //public ImageView image_view3;
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             //img_description=itemView.findViewById(R.id.img_description);
             image_view1=itemView.findViewById(R.id.image_view1);
-            image_view2=itemView.findViewById(R.id.image_view2);
-            image_view3=itemView.findViewById(R.id.image_view3);
+            //image_view2=itemView.findViewById(R.id.image_view2);
+            //image_view3=itemView.findViewById(R.id.image_view3);
         }
     }
 }

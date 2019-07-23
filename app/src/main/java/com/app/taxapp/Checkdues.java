@@ -165,7 +165,7 @@ public class Checkdues extends Settings {
                                         if (pscno.equals(info.getCan())){
 
                                             AlertDialog.Builder builder = new AlertDialog.Builder(Checkdues.this);
-                                            builder.setTitle("Your Property Tax Due");
+                                            builder.setTitle("Water Bill Details");
                                             builder.setMessage("\n"+"Name :"+info.getCn()+"\n"
                                                     +"CAN Number :"+info.getCan()+"\n"
                                                     +"Category :"+info.getCategory()+"\n\n"

@@ -20,10 +20,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
+
 public class Regtanker extends AppCompatActivity {
     TextInputEditText cn,address,mno;
     DatabaseReference data;
     Tankerdetails info;
+    SpinnerDialog wardspinnerDialog;
+    ArrayList<String> type1 = new ArrayList<>();
     int year;
     int month;
     int dayofMonth;
@@ -33,7 +38,7 @@ public class Regtanker extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regtanker);
 
-        final Spinner ward = findViewById(R.id.ward);
+        final Button ward = findViewById(R.id.ward);
         final TextView street = findViewById(R.id.street);
         cn = findViewById(R.id.cn);
         address = findViewById(R.id.address);
@@ -44,34 +49,25 @@ public class Regtanker extends AppCompatActivity {
         info = new Tankerdetails();
         data = FirebaseDatabase.getInstance().getReference().child("Tankerdetails");
 
-        final List<String> power = new ArrayList<String>();
-        power.add("Select Ward number");
-        for (int i=1;i <= 24; i++){
-            power.add(""+i);
-        }
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,power);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ward.setAdapter(arrayAdapter);
-        ward.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ward.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                ward.setSelection(i);
-
-                if (i != 0 ) {
-                    street.setText("WARD NO :" +i);
-                }else {
-                    street.setText("Select Street");
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                initItems1();
+                wardspinnerDialog = new SpinnerDialog(Regtanker.this, type1, "Select Street");
+                wardspinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+                    @Override
+                    public void onClick(final String type1, int position) {
+                        if (!type1.isEmpty()){
+                            street.setVisibility(View.VISIBLE);
+                            street.setText(type1);
+                        }
+                    }
+                });
+                wardspinnerDialog.showSpinerDialog();
             }
         });
 
-        date.setOnClickListener(new View.OnClickListener() {
+            date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar calender = Calendar.getInstance();
@@ -113,4 +109,41 @@ public class Regtanker extends AppCompatActivity {
             }
         });
     }
+
+    public void initItems1(){
+        type1.add("A C GUARDS");
+        type1.add("AZAMABAD");
+        type1.add("BANJARA HILLS");
+        type1.add("BOWENPALLY");
+        type1.add("CHAMPAPET");
+        type1.add("CHANCHALGUDA");
+        type1.add("GACHIBOWLI");
+        type1.add("GAGANPAHAD");
+        type1.add("GREENLANDS");
+        type1.add("HABSIGUDA");
+        type1.add("HAYATNAGAR");
+        type1.add("IBRAHIMBAGH");
+        type1.add("IBRAHIMPATNAM");
+        type1.add("INDIRA PARK");
+        type1.add("JEEDIMETLA");
+        type1.add("KANDUKUR");
+        type1.add("KEESARA");
+        type1.add("KONDAPUR");
+        type1.add("KUKATPALLY");
+        type1.add("MALKAJGIRI");
+        type1.add("MEDCHAL");
+        type1.add("MINT COMPOUND");
+        type1.add("PARADISE");
+        type1.add("QUTBULLAHPUR");
+        type1.add("RETHIBOWLI");
+        type1.add("RP NILAYAM");
+        type1.add("SAINIKPURI");
+        type1.add("SALAR JUNG");
+        type1.add("SANATH NAGAR");
+        type1.add("SAROORNAGAR");
+        type1.add("SHADNAGAR");
+        type1.add("SITHAPHALMANDI");
+        type1.add("SULTAN BAZAR");
+    }
 }
+
