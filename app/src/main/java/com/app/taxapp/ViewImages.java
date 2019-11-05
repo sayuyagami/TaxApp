@@ -60,12 +60,12 @@ public class ViewImages extends AppCompatActivity {
                     mUploads.add(apr);*/
 
                 mUploads.add(upload);
-                Toast.makeText(ViewImages.this,"Data : "+mUploads.add(upload),Toast.LENGTH_LONG).show();
+                //Toast.makeText(ViewImages.this,"Data : "+mUploads.add(upload),Toast.LENGTH_LONG).show();
 
                 mAdapter=new ImageAdapter(ViewImages.this,mUploads);
                 mRecyclerView.setAdapter(mAdapter);
                 //Toast.makeText(ViewImages.this,"details: "+mUploads.get(1),Toast.LENGTH_LONG).show();
-                Toast.makeText(ViewImages.this,"details: "+upload.getDescp(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(ViewImages.this,"details: "+upload.getDescp(),Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.INVISIBLE);
             }
 

@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Admin extends AppCompatActivity {
     TextInputEditText adminmail;
@@ -26,6 +28,7 @@ public class Admin extends AppCompatActivity {
     Button adminbtn;
     FirebaseAuth Auth;
     ProgressBar adminbar;
+    Complaintdetails details;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class Admin extends AppCompatActivity {
         adminpass = findViewById(R.id.adminpass);
         adminbtn = (Button) findViewById(R.id.adminbtn);
         adminbar = (ProgressBar)findViewById(R.id.adminbar);
+        details = new Complaintdetails();
+        final DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
 
         Auth = FirebaseAuth.getInstance();
 
@@ -64,6 +69,8 @@ public class Admin extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     adminbar.setVisibility(View.VISIBLE);
+                                    details.setComplaintid(0);
+                                    reff.child(String.valueOf(0)).setValue(details);
                                     startActivity(new Intent(getApplicationContext(), Adminhome.class));
                                     finish();
                                 } else {

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class Complaintdata extends AppCompatActivity {
 
-    DatabaseReference data;
+    DatabaseReference data,usersdRef;
     SendNotifications notify;
     ListView listView;
     private String m_Text = "";
@@ -43,28 +43,33 @@ public class Complaintdata extends AppCompatActivity {
 
         listView = findViewById(R.id.clist);
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference usersdRef = rootRef.child("Complaintdetails");
+        usersdRef = rootRef.child("Complaintdetails");
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String cid = ds.child("complaintid").getValue(String.class);
+                    int cid = ds.child("complaintid").getValue(int.class);
                     String un = ds.child("category").getValue(String.class);
                     String em = ds.child("problem").getValue(String.class);
                     String mno = ds.child("mno").getValue(String.class);
                     String lm = ds.child("land").getValue(String.class);
                     String dp = ds.child("descp").getValue(String.class);
 
-                    Log.d("TAG",cid);
-                    Log.d("TAG", un);
-                    Log.d("TAG", em);
-                    Log.d("TAG", mno);
-                    Log.d("TAG", lm);
-                    Log.d("TAG", dp);
+                    if (cid != 0) {
+                        Log.d("TAG", String.valueOf(cid));
+                        Log.d("TAG", un);
+                        Log.d("TAG", em);
+                        Log.d("TAG", mno);
+                        Log.d("TAG", lm);
+                        Log.d("TAG", dp);
 
-                    feed.add("\n"+"Complaint ID :"+ cid +"\n"+"Category :" +un +"\n"+"Problem :" +em +"\n"+"Mobile no :" +mno +"\n"+"Landmark :" +lm +"\n"+"Description :" +dp +"\n"+ "");
-                    feed.add("REPLY");
+                        feed.add("\n" + "Complaint ID :" + cid + "\n" + "Category :" + un + "\n" + "Problem :" + em + "\n" + "Mobile no :" + mno + "\n" + "Landmark :" + lm + "\n" + "Description :" + dp + "\n" + "");
+                        feed.add("REPLY");
 
+                    } else {
+                        Toast.makeText(Complaintdata.this,"No complaints yet !!",Toast.LENGTH_LONG).show();
+                       // feed.add("No complaints yet");
+                        }
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Complaintdata.this,android.R.layout.simple_list_item_1,feed);
                 listView.setAdapter(arrayAdapter);
@@ -86,7 +91,7 @@ public class Complaintdata extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                                final String cid = ds.child("complaintid").getValue(String.class);
+                                final int cid = ds.child("complaintid").getValue(int.class);
                                 final String un = ds.child("category").getValue(String.class);
                                 final String em = ds.child("problem").getValue(String.class);
 
@@ -109,14 +114,17 @@ public class Complaintdata extends AppCompatActivity {
                                         m_Text = input.getText().toString().trim();
                                         String compid = listPosition;
 
-                                        notify.setComid(cid);
+                                        notify.setComid(Integer.parseInt(String.valueOf(cid)));
                                         notify.setCategory(un);
                                         notify.setPrblm(em);
                                         notify.setStatus("Request accepted");
                                         notify.setMessage(m_Text);
 
-                                        data.child(cid).setValue(notify);
+                                        data.child(String.valueOf(cid)).setValue(notify);
                                         Toast.makeText(Complaintdata.this,"Reply Sent Successfully",Toast.LENGTH_LONG).show();
+                                        usersdRef.child(String.valueOf(cid)).setValue(null);
+                                        recreate();
+
                                     }
                                 });
                                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -138,10 +146,10 @@ public class Complaintdata extends AppCompatActivity {
                         public void onCancelled(DatabaseError databaseError) {}
                     };
                     usersdRef.addListenerForSingleValueEvent(eventListener);
-                }else {
+                }/*else {
                     Intent intent = new Intent(Complaintdata.this,ViewImages.class);
                     startActivity(intent);
-                }
+                }*/
             }
         });
     }

@@ -273,7 +273,6 @@ public class ProfileActivity extends Settings {
             Toast.makeText(this,"Successfully Logged Out",Toast.LENGTH_LONG).show();
             //startActivity(new Intent(this,MainActivity.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
 

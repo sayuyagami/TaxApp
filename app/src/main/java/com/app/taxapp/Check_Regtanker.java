@@ -33,16 +33,16 @@ public class Check_Regtanker extends AppCompatActivity {
                     String cid = ds.child("wardnumber").getValue(String.class).trim();
                     String cat = ds.child("customername").getValue(String.class).trim();
                     String prblm = ds.child("curdate").getValue(String.class).trim();
-                    //String stat = ds.child("status").getValue(String.class).trim();
+                    String stat = ds.child("status").getValue(String.class).trim();
                     String un = ds.child("msg").getValue(String.class).trim();
 
                     Log.d("TAG", cid);
                     Log.d("TAG", cat);
                     Log.d("TAG", prblm);
-                    //Log.d("TAG", stat);
+                    Log.d("TAG", stat);
                     Log.d("TAG", un);
 
-                    msg.add("\n"+"Name :" +cat+"\n"+cid+"\n"+"Status :"+ "Request accepted"+"\n"+"Reply :"+un+"\n");
+                    msg.add("\n"+"Name :" +cat+"\n"+cid+"\n"+"Status :"+ stat+"\n"+"Reply :"+un+"\n");
 
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Check_Regtanker.this,android.R.layout.simple_list_item_1,msg);

@@ -1,9 +1,14 @@
 package com.app.taxapp;
 
 public class Complaintdetails {
-    String category,problem,mno,land,descp,complaintid,addpicleft,addpic,addpicright;
+    int complaintid;
+    String category,problem,mno,land,descp,addpicleft,addpic,addpicright;
 
     public Complaintdetails() {
+    }
+
+    public void setComplaintid(int complaintid) {
+        this.complaintid = complaintid;
     }
 
     public Complaintdetails(String category, String problem, String mno, String land, String descp, String complaintid, String addpicleft, String addpic, String addpicright) {
@@ -12,7 +17,7 @@ public class Complaintdetails {
         this.mno = mno;
         this.land = land;
         this.descp = descp;
-        this.complaintid = complaintid;
+        //this.complaintid = complaintid;
         this.addpicleft = addpicleft;
         this.addpic = addpic;
         this.addpicright = addpicright;
@@ -42,13 +47,13 @@ public class Complaintdetails {
         this.addpicright = addpicright;
     }
 
-    public String getComplaintid() {
+    /*public String getComplaintid() {
         return complaintid;
     }
 
     public void setComplaintid(String complaintid) {
         this.complaintid = complaintid;
-    }
+    }*/
 
     public String getCategory() {
         return category;

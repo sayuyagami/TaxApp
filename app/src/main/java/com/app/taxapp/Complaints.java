@@ -60,7 +60,7 @@ import static java.lang.Integer.parseInt;
 
 public class Complaints extends Settings {
 
-    EditText complaintid;
+    TextView complaintid;
     SpinnerDialog categoryspinnerDialog,prblmspinnerDialog;
     TextInputEditText userno,landmark,descp;
     Button complaintsubmit,category,problem;
@@ -73,7 +73,7 @@ public class Complaints extends Settings {
     private static final int CAMERA_REQUEST_CODE = 200;
 
     DatabaseReference reff,creff;
-    StorageReference storagereff;
+    StorageReference storagereff,file1reff,file2reff,file3reff;
 
     StorageTask stask;
     Uri imguril,imguri,imgurir;
@@ -358,34 +358,37 @@ public class Complaints extends Settings {
 
         });
 
-        /*final String cid = ds.child("complaintid").getValue(String.class);
+        //database connection
+        reff = FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
+        creff = FirebaseDatabase.getInstance().getReference().child("SendNotifications");
+
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String cid = ds.child("complaintid").getValue(String.class);
-                    Log.d("TAG", cid);
-                    //int idnum = Integer.parseInt(cid) + 1;
-                    complaintid.setText(cid + 1);
+                    Integer cid = ds.child("complaintid").getValue(int.class);
+                    //Log.d("TAG", String.valueOf(cid));
+                    if (cid >= 1){
+                        int n = 1;
+                        cid += n;
+                        complaintid.setText(String.format("%s", cid));
+                    }else {
+                        cid = 1;
+                        complaintid.setText(String.format("%s", cid));
+                    }
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
-        reff.addListenerForSingleValueEvent(eventListener);*/
-
-
-        //database connection
-        reff = FirebaseDatabase.getInstance().getReference().child("Complaintdetails");
-        creff = FirebaseDatabase.getInstance().getReference().child("SendNotifications");
+        reff.addListenerForSingleValueEvent(eventListener);
 
         complaintsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (stask == null){
-                    Toast.makeText(Complaints.this,"please fill all the fields",Toast.LENGTH_LONG).show();
+                if (imguri==null && imguril == null && imgurir==null){
+                 Toast.makeText(Complaints.this,"please fill all the fields",Toast.LENGTH_LONG).show();
                 }else {
                     submitbar.setVisibility(VISIBLE);
                     uploadimage();
@@ -499,10 +502,10 @@ public class Complaints extends Settings {
                                 imguril = clipData.getItemAt(0).getUri();
                                 imguri = clipData.getItemAt(1).getUri();
                                 imgurir = clipData.getItemAt(2).getUri();
-                                Log.e("MAS IMGS: ", imguri.toString());
-                                /*Picasso.with(this).load(imguril).into(addpicleft);
+                                //Log.e("MAS IMGS: ", imguri.toString());
+                                Picasso.with(this).load(imguril).into(addpicleft);
                                 Picasso.with(this).load(imguri).into(addpic);
-                                Picasso.with(this).load(imgurir).into(addpicright);*/
+                                Picasso.with(this).load(imgurir).into(addpicright);
                             }
                         }
                     } catch (NullPointerException e){
@@ -522,19 +525,19 @@ public class Complaints extends Settings {
     }
 
     private  void uploadimage(){
-        final String cid = complaintid.getText().toString().trim();
+        final int cid = Integer.parseInt(complaintid.getText().toString().trim());
         String cat = category.getText().toString().trim();
         String prblm = problem.getText().toString().trim();
         String uno = userno.getText().toString().trim();
         String lmark = landmark.getText().toString().trim();
         String dcp = descp.getText().toString().trim();
 
-        storagereff = FirebaseStorage.getInstance().getReference(cid);
+        storagereff = FirebaseStorage.getInstance().getReference(String.valueOf(cid));
 
         if (imguril!= null && imguri!= null && imgurir!= null ){
-            final StorageReference file1reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imguril));
-            final StorageReference file2reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imguri));
-            final StorageReference file3reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imgurir));
+            file1reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imguril));
+            file2reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imguri));
+            file3reff = storagereff.child(System.currentTimeMillis()+"."+getFileExtension(imgurir));
 
             //stask = file2reff.putFile(imguri);
 
@@ -553,7 +556,7 @@ public class Complaints extends Settings {
                         public void onSuccess(Uri uri) {
                             String url1 = ts1.getUploadSessionUri().toString();
                             details.setAddpicleft(url1);
-                            reff.child(cid).setValue(details);
+                            reff.child(String.valueOf(cid)).setValue(details);
                             addpicleft.setImageResource(R.drawable.ic_action_image);
                         }
                     });
@@ -575,7 +578,7 @@ public class Complaints extends Settings {
                         public void onSuccess(Uri uri) {
                             String url2 = ts2.getUploadSessionUri().toString();
                             details.setAddpic(url2);
-                            reff.child(cid).setValue(details);
+                            reff.child(String.valueOf(cid)).setValue(details);
                             addpic.setImageResource(R.drawable.ic_action_image);
                         }
                     });
@@ -597,7 +600,7 @@ public class Complaints extends Settings {
                         public void onSuccess(Uri uri) {
                             String url3 = ts3.getUploadSessionUri().toString();
                             details.setAddpicright(url3);
-                            reff.child(cid).setValue(details);
+                            reff.child(String.valueOf(cid)).setValue(details);
                             Toast.makeText(Complaints.this, "Complaint Submitted successfully", Toast.LENGTH_LONG).show();
                             addpicright.setImageResource(R.drawable.ic_action_image);
                             submitbar.setVisibility(View.GONE);
@@ -607,7 +610,7 @@ public class Complaints extends Settings {
             });
 
             try {
-                if (!cid.isEmpty() && !cat.isEmpty() && !prblm.isEmpty() && !uno.isEmpty() && !lmark.isEmpty() && !dcp.isEmpty()){
+                if ( !cat.isEmpty() && !prblm.isEmpty() && !uno.isEmpty() && !lmark.isEmpty() && !dcp.isEmpty()){
                     details.setComplaintid(cid);
                     details.setCategory(cat);
                     details.setProblem(prblm);
@@ -621,8 +624,8 @@ public class Complaints extends Settings {
                     data.setMessage("in process");
                     data.setStatus("Wait for reply");
 
-                    reff.child(cid).setValue(details);
-                    creff.child(cid).setValue(data);
+                    reff.child(String.valueOf(cid)).setValue(details);
+                    creff.child(String.valueOf(cid)).setValue(data);
 
                     complaintid.setText("");
                     category.setText("SELECT CATEGORY");

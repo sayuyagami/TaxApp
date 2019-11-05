@@ -94,6 +94,9 @@ public class Regtanker extends AppCompatActivity {
                 String addr = address.getText().toString().trim();
                 String dt = date.getText().toString().trim();
 
+                DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("SendReply");
+                SendReply reg = new SendReply();
+
                 if (!str.isEmpty() && !name.isEmpty() && !phn.isEmpty() && !addr.isEmpty() && !dt.isEmpty()){
                     info.setWardnum(str);
                     info.setName(name);
@@ -101,7 +104,21 @@ public class Regtanker extends AppCompatActivity {
                     info.setAddress(addr);
                     info.setDate(dt);
 
+                    reg.setWardnumber(str);
+                    reg.setCustomername(name);
+                    reg.setCurdate(dt);
+                    reg.setStatus("Wait for reply");
+                    reg.setMno(phn);
+                    reg.setMsg("In process.....");
+
                     data.child(phn).setValue(info);
+                    reff.child(phn).setValue(reg);
+                    street.setText("");
+                    cn.setText("");
+                    mno.setText("");
+                    address.setText("");
+                    date.setText("");
+
                     Toast.makeText(Regtanker.this,"Sent Request",Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(Regtanker.this,"Please fill all the fields",Toast.LENGTH_LONG).show();

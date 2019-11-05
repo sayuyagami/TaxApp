@@ -1,9 +1,18 @@
 package com.app.taxapp;
 
 public class SendNotifications {
-    String message,comid,category,prblm,status;
+    int comid;
+    String message,category,prblm,status;
 
     public SendNotifications() {
+    }
+
+    public int getComid() {
+        return comid;
+    }
+
+    public void setComid(int comid) {
+        this.comid = comid;
     }
 
     public String getStatus() {
@@ -14,9 +23,9 @@ public class SendNotifications {
         this.status = status;
     }
 
-    public String getComid() {
+    /*public String getComid() {
         return comid;
-    }
+    }*/
 
     public String getCategory() {
         return category;
@@ -34,9 +43,9 @@ public class SendNotifications {
         this.prblm = prblm;
     }
 
-    public void setComid(String comid) {
+    /*public void setComid(String comid) {
         this.comid = comid;
-    }
+    }*/
 
     public String getMessage() {
         return message;

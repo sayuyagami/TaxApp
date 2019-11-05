@@ -114,7 +114,7 @@ public class AddBookings extends AppCompatActivity {
                                         reply.setCustomername(un);
                                         reply.setCurdate(em);
                                         reply.setMno(mn);
-                                        //reply.setStatus(status);
+                                        reply.setStatus("Request accepted");
                                         reply.setMsg(m_Text);
 
                                         data.child(mn).setValue(reply);

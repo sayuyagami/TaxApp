@@ -31,13 +31,13 @@ public class Notifications extends Settings {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String cid = ds.child("comid").getValue(String.class).trim();
+                    int cid = ds.child("comid").getValue(int.class);
                     String cat = ds.child("category").getValue(String.class).trim();
                     String prblm = ds.child("prblm").getValue(String.class).trim();
                     String un = ds.child("message").getValue(String.class).trim();
                     String sta = ds.child("status").getValue(String.class).trim();
 
-                    Log.d("TAG", cid);
+                    Log.d("TAG", String.valueOf(cid));
                     Log.d("TAG", cat);
                     Log.d("TAG", prblm);
                     Log.d("TAG", sta);
